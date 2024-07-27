@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import Navbar from '@/components/navbar'
 import UserLibrary from '@/components/userLibrary'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import Topbar from '@/components/topbar'
 
 const spotifyFont = localFont({
   src: '../assets/font/GothamMedium.ttf',
@@ -42,7 +43,13 @@ export default function RootLayout({
             </div>
 
             {/* page */}
-            <div className="rounded p-2" style={{ gridArea: 'main-view' }}>
+            <div
+              className="flex flex-col gap-2 rounded p-2"
+              style={{ gridArea: 'main-view' }}
+            >
+              <nav className="w-full">
+                <Topbar />
+              </nav>
               <main className="h-full w-full rounded-xl bg-card p-2">
                 {children}
               </main>
