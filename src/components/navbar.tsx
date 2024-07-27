@@ -1,9 +1,9 @@
 'use client'
 
-import Link from "next/link";
-import HomeIcon from "./icons/home";
-import SearchIcon from "./icons/search";
-import { usePathname } from "next/navigation";
+import Link from 'next/link'
+import HomeIcon from './icons/home'
+import SearchIcon from './icons/search'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -12,13 +12,13 @@ export default function Navbar() {
     {
       title: 'Home',
       href: '/',
-      icon: <HomeIcon active={pathname === '/'} />
+      icon: <HomeIcon active={pathname === '/'} />,
     },
     {
       title: 'Search',
       href: '/search',
-      icon: <SearchIcon active={pathname === '/search'} />
-    }
+      icon: <SearchIcon active={pathname === '/search'} />,
+    },
   ]
 
   return (
@@ -27,9 +27,9 @@ export default function Navbar() {
         <Link href={item.href} key={`navbar_item_${item.href}`}>
           <li
             style={{
-              color: pathname === item.href ? 'var(--text-foreground' : ''
+              color: pathname === item.href ? 'var(--text-foreground' : '',
             }}
-            className="h-10 w-full flex items-center gap-5 py-6 px-3 text-card-foreground hover:text-foreground duration-150"
+            className="flex h-10 w-full items-center gap-5 px-3 py-6 text-card-foreground duration-150 hover:text-foreground"
           >
             {item.icon}
             <h3 className="font-bold">{item.title}</h3>

@@ -1,7 +1,5 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Home() {
-  return (
-    <div className="w-full h-full">Main page</div>
-  );
+  return <div className="h-full w-full">Main page</div>
 }
