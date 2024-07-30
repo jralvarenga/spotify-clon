@@ -6,6 +6,7 @@ import Navbar from '@/components/navbar'
 import UserLibrary from '@/components/userLibrary'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Topbar from '@/components/topbar'
+import LoginWindow from '@/components/login'
 
 const spotifyFont = localFont({
   src: '../assets/font/GothamMedium.ttf',
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <TooltipProvider>
         <body className={cn('spotify-font dark', spotifyFont.variable)}>
+          <LoginWindow />
           <div className="spotify-grid h-screen w-full">
             {/* left sidebar */}
             <div
