@@ -5,6 +5,7 @@ import ArrowLeftIcon from './icons/arrowLeft'
 import ArrowRightIcon from './icons/arrowRight'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import Link from 'next/link'
 
 export default function Topbar() {
   const router = useRouter()
@@ -36,7 +37,10 @@ export default function Topbar() {
       </div>
 
       <div className="flex gap-2">
-        <Popover>
+        <Link href={'/login'}>
+          <button className="white-button px-7 text-sm">Log in</button>
+        </Link>
+        {/* <Popover>
           <PopoverTrigger>
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" />
@@ -44,7 +48,7 @@ export default function Topbar() {
             </Avatar>
           </PopoverTrigger>
           <PopoverContent className="rounded-xl">user menu</PopoverContent>
-        </Popover>
+        </Popover> */}
       </div>
     </div>
   )

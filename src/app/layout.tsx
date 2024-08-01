@@ -6,6 +6,7 @@ import Navbar from '@/components/navbar'
 import UserLibrary from '@/components/userLibrary'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Topbar from '@/components/topbar'
+import PreviewPlayer from '@/components/previewPlayer'
 import LoginWindow from '@/components/login'
 
 const spotifyFont = localFont({
@@ -28,6 +29,7 @@ export default function RootLayout({
       <TooltipProvider>
         <body className={cn('spotify-font dark', spotifyFont.variable)}>
           <LoginWindow />
+
           <div className="spotify-grid h-screen w-full">
             {/* left sidebar */}
             <div
@@ -62,7 +64,9 @@ export default function RootLayout({
               className="min-h-20 w-full p-2 pt-0"
               style={{ gridArea: 'now-playing-bar' }}
             >
-              <footer className="h-full w-full">player</footer>
+              <footer className="h-full w-full">
+                <PreviewPlayer />
+              </footer>
             </div>
           </div>
         </body>

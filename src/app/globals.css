@@ -31,6 +31,7 @@ display: -webkit-box;
 
 @layer base {
   :root {
+    --radius: 4px;
    /* --background-base: #121212;
     --background-highlight: #1f1f1f;
     --background-press: #000;
@@ -118,5 +119,9 @@ display: -webkit-box;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .white-button {
+    @apply w-fit rounded-full bg-foreground p-2 px-4 font-bold text-background hover:bg-foreground;
   }
 }

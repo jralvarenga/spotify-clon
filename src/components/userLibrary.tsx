@@ -1,9 +1,11 @@
+import NoPlaylists from './noPlaylists'
 import LibraryIcon from './icons/library'
 import NewFolterIcon from './icons/newFolder'
 import NewPlaylistIcon from './icons/newPlaylist'
 import PlusIcon from './icons/plus'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
+import BrowsePodcast from './browsePodcasts'
 
 export default function UserLibrary() {
   const NEW_OPTIONS = [
@@ -20,7 +22,7 @@ export default function UserLibrary() {
   ]
 
   return (
-    <div className="px-3 py-2">
+    <div className="flex flex-col gap-5 px-3 py-2">
       {/* title */}
       <div className="flex items-center justify-between">
         <button className="flex w-full items-center gap-3 px-3 text-card-foreground duration-150 hover:text-foreground">
@@ -58,6 +60,12 @@ export default function UserLibrary() {
             </ul>
           </PopoverContent>
         </Popover>
+      </div>
+
+      {/* playlists */}
+      <div className="flex flex-col gap-3">
+        <NoPlaylists />
+        <BrowsePodcast />
       </div>
     </div>
   )
