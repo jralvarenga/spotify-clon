@@ -60,7 +60,7 @@ export default function LoginWindow() {
 
   return (
     <div className="fixed z-50 flex h-screen w-full items-center justify-center bg-white/15 backdrop-blur-sm dark:bg-black/15">
-      <div className="min-w-md relative flex h-5/6 min-h-[calc(100vh_-_10px)] w-2/4 max-w-3xl flex-col rounded-xl bg-card px-24 shadow-lg">
+      <div className="min-w-md max-w-2/4 relative flex h-5/6 min-h-[calc(100vh_-_10px)] w-full max-w-3xl flex-col rounded-xl bg-card px-24 shadow-lg">
         <button
           onClick={() => router.push('/')}
           className="absolute right-4 top-4"
