@@ -8,7 +8,7 @@ export default function UserIsNotLogin() {
         You haven't log in into Spotify, if you want to use this app you need to
         log in with Spotify here
       </p>
-      <Link href={'/login'}>
+      <Link href={'/api/login'}>
         <button className="white-button p-3 px-9 text-lg">Log in</button>
       </Link>
     </div>

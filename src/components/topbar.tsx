@@ -37,7 +37,7 @@ export default function Topbar() {
       </div>
 
       <div className="flex gap-2">
-        <Link href={'/login'}>
+        <Link href={'/api/login'}>
           <button className="white-button px-7 text-sm">Log in</button>
         </Link>
         {/* <Popover>

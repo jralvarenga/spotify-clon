@@ -11,7 +11,7 @@ export default function PreviewPlayer() {
       </div>
 
       <div>
-        <Link href={'/login'}>
+        <Link href={'/api/login'}>
           <button className="white-button bg-white px-8 text-black">
             Log in
           </button>
