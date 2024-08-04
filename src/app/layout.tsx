@@ -7,6 +7,8 @@ import UserLibrary from '@/components/userLibrary'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Topbar from '@/components/topbar'
 import PreviewPlayer from '@/components/previewPlayer'
+import { getCurrentUserInfo, getCurrentUserPlaylists } from '@/actions/spotify'
+import { cookies } from 'next/headers'
 
 const spotifyFont = localFont({
   src: '../assets/font/GothamMedium.ttf',
@@ -18,11 +20,15 @@ export const metadata: Metadata = {
   description: '',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const accessToken = cookies().get('access_token')?.value
+  const user = await getCurrentUserInfo({ accessToken })
+  const playlists = await getCurrentUserPlaylists({ accessToken })
+
   return (
     <html lang="en">
       <TooltipProvider>
@@ -33,12 +39,12 @@ export default function RootLayout({
               className="h-full w-96 p-2 pr-0"
               style={{ gridArea: 'left-sidebar' }}
             >
-              <nav className="flex h-full w-full flex-col gap-2">
+              <nav className="flex w-full flex-col gap-2">
                 <div className="rounded-xl bg-card">
                   <Navbar />
                 </div>
                 <div className="flex-1 rounded-xl bg-card p-2">
-                  <UserLibrary />
+                  <UserLibrary playlists={playlists} />
                 </div>
               </nav>
             </div>
@@ -49,7 +55,7 @@ export default function RootLayout({
               style={{ gridArea: 'main-view' }}
             >
               <nav className="w-full">
-                <Topbar />
+                <Topbar user={user} />
               </nav>
               <main className="h-full w-full rounded-xl bg-card p-2">
                 {children}

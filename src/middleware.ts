@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
   const refreshToken = cookies().get('refresh_token')
   const tokenSavedAt = cookies().get('token_saved_at')
 
-  if (!accessToken?.value || !refreshToken?.value) {
+  if (!accessToken || !refreshToken) {
+    console.log('xd')
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
@@ -30,6 +31,6 @@ export const config = {
      * - login
      * - api
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|login/api).*)"
+    "/((?!api|_next/static|_next/image|favicon.ico|login|api).*)"
   ],
 }

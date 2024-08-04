@@ -3,11 +3,23 @@
 import { useRouter } from 'next/navigation'
 import ArrowLeftIcon from './icons/arrowLeft'
 import ArrowRightIcon from './icons/arrowRight'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import Link from 'next/link'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu'
+import { SpotifyUser } from 'spotify-api'
 
-export default function Topbar() {
+interface Props {
+  user: SpotifyUser | null
+}
+
+export default function Topbar({ user }: Props) {
   const router = useRouter()
 
   const NAV_BUTTONS = [
@@ -22,6 +34,7 @@ export default function Topbar() {
       action: () => router.forward(),
     },
   ]
+
   return (
     <div className="flex w-full items-center justify-between px-2">
       <div className="flex gap-2">
@@ -37,18 +50,29 @@ export default function Topbar() {
       </div>
 
       <div className="flex gap-2">
-        <Link href={'/api/login'}>
-          <button className="white-button px-7 text-sm">Log in</button>
-        </Link>
-        {/* <Popover>
-          <PopoverTrigger>
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </PopoverTrigger>
-          <PopoverContent className="rounded-xl">user menu</PopoverContent>
-        </Popover> */}
+        {user ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <Avatar>
+                <AvatarImage src={user.images[0].url} />
+                <AvatarFallback>{user.display_name}</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <Link href={'/api/logout'}>
+                <DropdownMenuItem>
+                  <button>Log out</button>
+                </DropdownMenuItem>
+              </Link>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Link href={'/api/login'}>
+            <button className="white-button px-7 text-sm">Log in</button>
+          </Link>
+        )}
       </div>
     </div>
   )

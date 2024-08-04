@@ -6,8 +6,16 @@ import PlusIcon from './icons/plus'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 import BrowsePodcast from './browsePodcasts'
+import { SpotifyCurrentUserPlaylists } from 'spotify-api'
+import Image from 'next/image'
+import Link from 'next/link'
+import PlaylistListItem from './playlistListItem'
 
-export default function UserLibrary() {
+interface Props {
+  playlists: SpotifyCurrentUserPlaylists | null
+}
+
+export default async function UserLibrary({ playlists }: Props) {
   const NEW_OPTIONS = [
     {
       title: 'Create Playlist',
@@ -22,9 +30,9 @@ export default function UserLibrary() {
   ]
 
   return (
-    <div className="flex flex-col gap-5 px-3 py-2">
+    <div className="flex flex-col gap-5 py-2">
       {/* title */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between px-3">
         <button className="flex w-full items-center gap-3 px-3 text-card-foreground duration-150 hover:text-foreground">
           <LibraryIcon />
           <h3 className="font-bold">Your Library</h3>
@@ -63,9 +71,22 @@ export default function UserLibrary() {
       </div>
 
       {/* playlists */}
-      <div className="flex flex-col gap-3">
-        <NoPlaylists />
-        <BrowsePodcast />
+      <div className="flex h-[calc(100vh_-_334px)] flex-col gap-1 overflow-y-auto">
+        {!playlists || playlists.items.length === 0 ? (
+          <>
+            <NoPlaylists />
+            <BrowsePodcast />
+          </>
+        ) : (
+          playlists.items.map((playlist) => (
+            <Link
+              href={`/playlist/${playlist.id}`}
+              key={`user_playlist_${playlist.id}`}
+            >
+              <PlaylistListItem playlist={playlist} />
+            </Link>
+          ))
+        )}
       </div>
     </div>
   )

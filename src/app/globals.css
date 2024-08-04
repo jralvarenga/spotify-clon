@@ -113,6 +113,21 @@ display: -webkit-box;
   }
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1ed760;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -124,4 +139,9 @@ display: -webkit-box;
   .white-button {
     @apply w-fit rounded-full bg-foreground p-2 px-4 font-bold text-background hover:bg-foreground;
   }
+
+  /* width */
+  /* ::-webkit-scrollbar {
+    width: 10px;
+  } */
 }
