@@ -9,6 +9,7 @@ import Topbar from '@/components/topbar'
 import PreviewPlayer from '@/components/previewPlayer'
 import { getCurrentUserInfo, getCurrentUserPlaylists } from '@/actions/spotify'
 import { cookies } from 'next/headers'
+import MusicPlayer from '@/components/musicPlayer'
 
 const spotifyFont = localFont({
   src: '../assets/font/GothamMedium.ttf',
@@ -33,7 +34,7 @@ export default async function RootLayout({
     <html lang="en">
       <TooltipProvider>
         <body className={cn('spotify-font dark', spotifyFont.variable)}>
-          <div className="spotify-grid h-screen w-full">
+          <div className="spotify-grid h-screen w-screen">
             {/* left sidebar */}
             <div
               className="h-full w-96 p-2 pr-0"
@@ -64,11 +65,11 @@ export default async function RootLayout({
 
             {/* player */}
             <div
-              className="min-h-20 w-full p-2 pt-0"
+              className="h-20 w-full p-2 pt-0"
               style={{ gridArea: 'now-playing-bar' }}
             >
               <footer className="h-full w-full">
-                <PreviewPlayer />
+                {accessToken ? <MusicPlayer /> : <PreviewPlayer />}
               </footer>
             </div>
           </div>

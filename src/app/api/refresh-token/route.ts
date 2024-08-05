@@ -1,8 +1,7 @@
-import dayjs from "dayjs";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
-import queryString from "query-string";
+import dayjs from "dayjs"
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+import queryString from "query-string"
 
 export async function GET() {
   const refresh_token = cookies().get('refresh_token')

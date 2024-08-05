@@ -15,6 +15,11 @@ export async function getCurrentUserInfo({ accessToken }: SpotifyActionsProps): 
         'Authorization': `Bearer ${accessToken}`
       }
     })
+
+    if (!res.ok) {
+      return null
+    }
+
     const data = await res.json()
     return data
   } catch (error) {
@@ -33,6 +38,11 @@ export async function getCurrentUserPlaylists({ accessToken }: SpotifyActionsPro
         'Authorization': `Bearer ${accessToken}`
       }
     })
+
+    if (!res.ok) {
+      return null
+    }
+
     const data = await res.json()
     return data
   } catch (error) {

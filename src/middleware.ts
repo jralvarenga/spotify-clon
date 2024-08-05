@@ -4,12 +4,16 @@ import type { NextRequest } from 'next/server'
 import { accessTokenIsExpired } from './helpers/accessTokenIsExpired'
 
 export function middleware(request: NextRequest) {
+  // const path = request.nextUrl.pathname
   const accessToken = cookies().get('access_token')
   const refreshToken = cookies().get('refresh_token')
   const tokenSavedAt = cookies().get('token_saved_at')
 
   if (!accessToken || !refreshToken) {
-    console.log('xd')
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
+
+  if (accessToken.value === '' || refreshToken.value === '') {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
@@ -31,6 +35,6 @@ export const config = {
      * - login
      * - api
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|login|api).*)"
+    "/((?!api|_next/static|_next/image|favicon.ico|login).*)"
   ],
 }

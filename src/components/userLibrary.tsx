@@ -7,7 +7,6 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 import BrowsePodcast from './browsePodcasts'
 import { SpotifyCurrentUserPlaylists } from 'spotify-api'
-import Image from 'next/image'
 import Link from 'next/link'
 import PlaylistListItem from './playlistListItem'
 
@@ -72,7 +71,7 @@ export default async function UserLibrary({ playlists }: Props) {
 
       {/* playlists */}
       <div className="flex h-[calc(100vh_-_334px)] flex-col gap-1 overflow-y-auto">
-        {!playlists || playlists.items.length === 0 ? (
+        {!playlists ? (
           <>
             <NoPlaylists />
             <BrowsePodcast />
