@@ -14,12 +14,10 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 import { SpotifyUser } from 'spotify-api'
+import useUser from '@/hooks/useUser'
 
-interface Props {
-  user: SpotifyUser | null
-}
-
-export default function Topbar({ user }: Props) {
+export default function Topbar() {
+  const { user, logout } = useUser()
   const router = useRouter()
 
   const NAV_BUTTONS = [
@@ -69,9 +67,10 @@ export default function Topbar({ user }: Props) {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Link href={'/api/login'}>
-            <button className="white-button px-7 text-sm">Log in</button>
-          </Link>
+          // <Link href={'/api/login'}>
+          <button onClick={logout} className="white-button px-7 text-sm">
+            Log in
+          </button>
         )}
       </div>
     </div>
