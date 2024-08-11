@@ -1,4 +1,4 @@
-import { SpotifyCurrentUserPlaylists, SpotifyUser } from "spotify-api"
+import { SpotifyCurrentUserPlaylists, SpotifyPlaybackState, SpotifyUser } from "spotify-api"
 
 type SpotifyActionsProps = {
   accessToken: string | null | undefined
@@ -50,3 +50,34 @@ export async function getCurrentUserPlaylists({ accessToken }: SpotifyActionsPro
   }
 }
 
+
+export async function getPlaybackState({ accessToken }: SpotifyActionsProps): Promise<SpotifyPlaybackState | '' | null> {
+  if (!accessToken) {
+    return null
+  }
+
+  try {
+    const res = await fetch('https://api.spotify.com/v1/me/player', {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
+
+    if (!res.ok) {
+      return null
+    }
+
+    const textData = await res.text()
+
+    if (textData !== '') {
+      const data = JSON.parse(textData)
+
+      return data
+    }
+
+    return null
+  } catch (error) {
+
+    return null
+  }
+}

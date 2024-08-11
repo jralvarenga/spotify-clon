@@ -7,7 +7,11 @@ import UserLibrary from '@/components/userLibrary'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Topbar from '@/components/topbar'
 import PreviewPlayer from '@/components/previewPlayer'
-import { getCurrentUserInfo, getCurrentUserPlaylists } from '@/actions/spotify'
+import {
+  getCurrentUserInfo,
+  getCurrentUserPlaylists,
+  getPlaybackState,
+} from '@/actions/spotify'
 import { cookies } from 'next/headers'
 import MusicPlayer from '@/components/musicPlayer'
 
@@ -29,6 +33,7 @@ export default async function RootLayout({
   const accessToken = cookies().get('access_token')?.value
   const user = await getCurrentUserInfo({ accessToken })
   const playlists = await getCurrentUserPlaylists({ accessToken })
+  const playbackState = await getPlaybackState({ accessToken })
 
   return (
     <html lang="en">
