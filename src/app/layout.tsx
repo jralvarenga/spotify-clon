@@ -7,11 +7,7 @@ import UserLibrary from '@/components/userLibrary'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import Topbar from '@/components/topbar'
 import PreviewPlayer from '@/components/previewPlayer'
-import {
-  getCurrentUserInfo,
-  getCurrentUserPlaylists,
-  getPlaybackState,
-} from '@/actions/spotify'
+import { getCurrentUserInfo, getCurrentUserPlaylists } from '@/actions/spotify'
 import { cookies } from 'next/headers'
 import MusicPlayer from '@/components/musicPlayer'
 import UserProvider from '@/providers/userProvider'
@@ -34,7 +30,6 @@ export default async function RootLayout({
   const accessToken = cookies().get('access_token')?.value
   const user = await getCurrentUserInfo({ accessToken })
   const playlists = await getCurrentUserPlaylists({ accessToken })
-  const playbackState = await getPlaybackState({ accessToken })
 
   return (
     <html lang="en">
@@ -52,7 +47,10 @@ export default async function RootLayout({
                     <Navbar />
                   </div>
                   <div className="flex-1 rounded-xl bg-card p-2">
-                    <UserLibrary playlists={playlists} />
+                    <UserLibrary
+                      showLikedSongs={!!user}
+                      playlists={playlists}
+                    />
                   </div>
                 </nav>
               </div>

@@ -11,10 +11,14 @@ import Link from 'next/link'
 import PlaylistListItem from './playlistListItem'
 
 interface Props {
+  showLikedSongs: boolean
   playlists: SpotifyCurrentUserPlaylists | null
 }
 
-export default async function UserLibrary({ playlists }: Props) {
+export default async function UserLibrary({
+  playlists,
+  showLikedSongs,
+}: Props) {
   const NEW_OPTIONS = [
     {
       title: 'Create Playlist',
@@ -71,6 +75,46 @@ export default async function UserLibrary({ playlists }: Props) {
 
       {/* playlists */}
       <div className="flex h-[calc(100vh_-_334px)] flex-col gap-1 overflow-y-auto">
+        {showLikedSongs && (
+          <Link href={`/liked/songs`}>
+            <PlaylistListItem
+              disableHoverCard
+              playlist={{
+                collaborative: false,
+                description: 'Liked songs by the user',
+                external_urls: {
+                  spotify: '',
+                },
+                href: '',
+                id: '',
+                images: [{ height: 0, url: '/img/liked-songs.png', width: 0 }],
+                name: 'Liked Songs',
+                owner: {
+                  display_name: 'user',
+                  external_urls: {
+                    spotify: '',
+                  },
+                  followers: {
+                    href: '',
+                    total: 0,
+                  },
+                  href: '',
+                  id: '',
+                  type: '',
+                  uri: '',
+                },
+                public: false,
+                snapshot_id: '',
+                tracks: {
+                  href: '',
+                  total: 0,
+                },
+                type: 'playlist',
+                uri: '',
+              }}
+            />
+          </Link>
+        )}
         {!playlists ? (
           <>
             <NoPlaylists />

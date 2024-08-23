@@ -59,18 +59,15 @@ export default function Topbar() {
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <Link href={'/api/logout'}>
-                <DropdownMenuItem>
-                  <button>Log out</button>
-                </DropdownMenuItem>
-              </Link>
+              <DropdownMenuItem>
+                <button onClick={logout}>Log out</button>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          // <Link href={'/api/login'}>
-          <button onClick={logout} className="white-button px-7 text-sm">
-            Log in
-          </button>
+          <Link href={'/api/login'}>
+            <button className="white-button px-7 text-sm">Log in</button>
+          </Link>
         )}
       </div>
     </div>

@@ -16,7 +16,7 @@ export default function UserProvider({ children, user: fetchedUser }: Props) {
 
   function logout() {
     setUser(null)
-    router.push(`api/logout`)
+    router.push(`/api/logout`)
   }
 
   useEffect(() => {

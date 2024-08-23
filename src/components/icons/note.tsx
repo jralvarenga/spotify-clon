@@ -2,7 +2,7 @@ interface Props {
   active?: boolean
 }
 
-export default function NewPlaylistIcon({ active = false }: Props) {
+export default function NoteIcon({ active = false }: Props) {
   return (
     <svg
       data-encore-id="icon"
