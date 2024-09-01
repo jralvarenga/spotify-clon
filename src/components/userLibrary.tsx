@@ -42,6 +42,30 @@ export default async function UserLibrary({
         </button>
 
         <Popover>
+          <PopoverTrigger className="text-card-foreground duration-150 hover:text-foreground">
+            <PlusIcon />
+          </PopoverTrigger>
+          <PopoverContent className="flex w-auto flex-col rounded-xl">
+            <ul>
+              {NEW_OPTIONS.map((item) => (
+                <li
+                  className="my-3 first:mt-0 last:mb-0"
+                  key={`create_item_${item.title}`}
+                >
+                  <button
+                    // onClick={item.action}
+                    className="flex h-full w-full items-center gap-2 text-card-foreground duration-150 hover:text-foreground"
+                  >
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </PopoverContent>
+        </Popover>
+
+        {/* <Popover>
           <PopoverTrigger>
             <Tooltip>
               <TooltipTrigger className="text-card-foreground duration-150 hover:text-foreground">
@@ -70,11 +94,11 @@ export default async function UserLibrary({
               ))}
             </ul>
           </PopoverContent>
-        </Popover>
+        </Popover> */}
       </div>
 
       {/* playlists */}
-      <div className="flex h-[calc(100vh_-_334px)] flex-col gap-1 overflow-y-auto">
+      <div className="flex h-[calc(100vh_-_250px)] flex-col gap-1 overflow-y-auto">
         {showLikedSongs && (
           <Link href={`/liked/songs`}>
             <PlaylistListItem
