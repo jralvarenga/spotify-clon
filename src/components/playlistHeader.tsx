@@ -5,37 +5,58 @@ interface Props {
   title: string
   type: string
   description: string
-  authors: {
-    displayName: string
-    url: string
-    picture: string
-  }[]
+  author: SpotifyApi.UserProfileResponse
 }
 
 export default function PlaylistHeader({
-  authors,
+  author,
   cover,
   description,
   title,
   type,
 }: Props) {
   return (
-    <div className="flex h-52 w-full items-end gap-3 p-5">
-      <div className="flex-shrink-0">
+    <header className="mt-5 flex flex-row gap-5 px-5">
+      <picture className="aspect-square h-52 w-52 flex-none">
         <img
           src={cover}
-          alt={`playlist_cover_${cover}`}
-          className="h-36 w-36 flex-shrink-0 rounded-xl"
+          alt={`Cover of ${title}`}
+          className="h-full w-full object-cover shadow-lg"
         />
-      </div>
-      <div className="flex h-full flex-col justify-between">
-        <h6 className="text-xs">{type}</h6>
-        <h2 className="text-6xl font-bold">{title}</h2>
-        <div>
-          <p className="text-xs text-card-foreground">{description}</p>
-          <h6>Author</h6>
+      </picture>
+
+      <div className="flex flex-col justify-between gap-3">
+        <h2 className="flex flex-1 items-end text-sm text-card-foreground">
+          {type}
+        </h2>
+        <div className="flex flex-col gap-3">
+          <h1 className="block text-7xl font-bold">{title}</h1>
+          <p className="text-sm font-normal text-card-foreground">
+            {description}
+          </p>
+        </div>
+
+        <div className="flex flex-1 items-end">
+          <div className="text-sm font-normal text-gray-300">
+            <div>
+              <div className="flex items-center gap-3 text-sm">
+                {' '}
+                <h6 className="flex items-center gap-2">
+                  {' '}
+                  <img
+                    src={author.images![0].url}
+                    className="h-6 w-6 rounded-full"
+                    alt={`playlist_author_prof_pic_${author.display_name}`}
+                  />
+                  <span className="font-bold">{author.display_name}</span>
+                </h6>
+                <h6 className="text-card-foreground">76 songs</h6>
+                <h6 className="text-card-foreground">About 3h 45min</h6>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </header>
   )
 }

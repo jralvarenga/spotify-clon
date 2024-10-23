@@ -4,15 +4,13 @@ import NewFolterIcon from './icons/newFolder'
 import NewPlaylistIcon from './icons/newPlaylist'
 import PlusIcon from './icons/plus'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 import BrowsePodcast from './browsePodcasts'
-import { SpotifyCurrentUserPlaylists } from 'spotify-api'
 import Link from 'next/link'
 import PlaylistListItem from './playlistListItem'
 
 interface Props {
   showLikedSongs: boolean
-  playlists: SpotifyCurrentUserPlaylists | null
+  playlists: SpotifyApi.ListOfCurrentUsersPlaylistsResponse | null
 }
 
 export default async function UserLibrary({
@@ -119,12 +117,12 @@ export default async function UserLibrary({
                     spotify: '',
                   },
                   followers: {
-                    href: '',
+                    href: null,
                     total: 0,
                   },
                   href: '',
                   id: '',
-                  type: '',
+                  type: 'user',
                   uri: '',
                 },
                 public: false,

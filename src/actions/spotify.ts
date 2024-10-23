@@ -1,10 +1,8 @@
-import { SpotifyCurrentUserPlaylists, SpotifyCurrentUserSavedTracks, SpotifyPlaybackState, SpotifyUser } from "spotify-api"
-
 type SpotifyActionsProps = {
   accessToken: string | null | undefined
 }
 
-export async function getCurrentUserInfo({ accessToken }: SpotifyActionsProps): Promise<SpotifyUser | null> {
+export async function getCurrentUserInfo({ accessToken }: SpotifyActionsProps): Promise<SpotifyApi.CurrentUsersProfileResponse | null> {
   if (!accessToken) {
     return null
   }
@@ -27,7 +25,7 @@ export async function getCurrentUserInfo({ accessToken }: SpotifyActionsProps): 
   }
 }
 
-export async function getCurrectUserLikedSongs({ accessToken }: SpotifyActionsProps): Promise<SpotifyCurrentUserSavedTracks | null> {
+export async function getCurrectUserLikedSongs({ accessToken }: SpotifyActionsProps): Promise<SpotifyApi.UsersSavedTracksResponse | null> {
   if (!accessToken) {
     return null
   }
@@ -54,7 +52,7 @@ export async function getCurrectUserLikedSongs({ accessToken }: SpotifyActionsPr
   }
 }
 
-export async function getCurrentUserPlaylists({ accessToken }: SpotifyActionsProps): Promise<SpotifyCurrentUserPlaylists | null> {
+export async function getCurrentUserPlaylists({ accessToken }: SpotifyActionsProps): Promise<SpotifyApi.ListOfCurrentUsersPlaylistsResponse | null> {
   if (!accessToken) {
     return null
   }
@@ -77,13 +75,13 @@ export async function getCurrentUserPlaylists({ accessToken }: SpotifyActionsPro
   }
 }
 
-export async function getPlaylistInfo({ accessToken, id }: SpotifyActionsProps & { id: string }): Promise<SpotifyPlaylistInfo | null> {
+export async function getPlaylistInfo({ accessToken, id }: SpotifyActionsProps & { id: string }): Promise<SpotifyApi.PlaylistObjectFull | null> {
   if (!accessToken) {
     return null
   }
 
   try {
-    const res = await fetch(`https://api.spotify.com/v1/playlist/${id}`, {
+    const res = await fetch(`https://api.spotify.com/v1/playlists/${id}`, {
       headers: {
         'Authorization': `Bearer ${accessToken}`
       }
@@ -96,12 +94,13 @@ export async function getPlaylistInfo({ accessToken, id }: SpotifyActionsProps &
     const data = await res.json()
     return data
   } catch (error) {
+
     return null
   }
 }
 
 
-export async function getPlaybackState({ accessToken }: SpotifyActionsProps): Promise<SpotifyPlaybackState | '' | null> {
+export async function getPlaybackState({ accessToken }: SpotifyActionsProps): Promise<SpotifyApi.CurrentPlaybackResponse | '' | null> {
   if (!accessToken) {
     return null
   }
@@ -126,6 +125,30 @@ export async function getPlaybackState({ accessToken }: SpotifyActionsProps): Pr
     }
 
     return null
+  } catch (error) {
+    return null
+  }
+}
+
+export async function getUserProfile({ accessToken, id }: SpotifyActionsProps & { id: string }): Promise<SpotifyApi.UserProfileResponse | null> {
+  if (!accessToken) {
+    return null
+  }
+
+  try {
+    const res = await fetch(`https://api.spotify.com/v1/users/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    })
+
+    if (!res.ok) {
+      return null
+    }
+
+    const user = await res.json()
+
+    return user
   } catch (error) {
     return null
   }

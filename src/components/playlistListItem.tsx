@@ -1,10 +1,9 @@
-import { SpotifyPlaylistListItem } from 'spotify-api'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card'
 import EmptyCover from './emptyCover'
 
 interface Props {
-  playlist: SpotifyPlaylistListItem
+  playlist: SpotifyApi.PlaylistObjectSimplified
   disableHoverCard?: boolean
 }
 
